@@ -1,7 +1,7 @@
 ;;; git-zip-commit.el --- Package a commit up as a zip file -*- lexical-binding: t -*-
 
 ;; Author: Kisaragi Hiu
-;; Version: 0.1
+;; Version: 0.1.0
 ;; Package-Requires: ((emacs "25.1") (dash "2.19.1"))
 
 

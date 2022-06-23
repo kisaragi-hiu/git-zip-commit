@@ -3,13 +3,15 @@
 (require 'git-zip-commit)
 (require 'buttercup)
 
+(message "Current directory: %s" default-directory)
+
 (describe "git-zip-commit--run"
   (it "can run a command"
     (expect (git-zip-commit--run "echo" "hello")
             :to-equal "hello\n"))
   (it "returns nil on failure"
     (expect (git-zip-commit--run "false")
-            :to-eq nil)))
+            :to-be nil)))
 
 (describe "git-zip-commit--commit-message"
   (it "gets the commit message"
@@ -18,7 +20,7 @@
             :to-equal "Initial commit"))
   (it "returns nil if it fails"
     (expect (git-zip-commit--commit-message "")
-            :to-eq nil)))
+            :to-be nil)))
 
 (describe "git-zip-commit--commit-changed-files"
   (it "returns list of changed files"
@@ -28,7 +30,7 @@
             :to-have-same-items-as '("tests/test-git-zip-commit.el")))
   (it "returns nil if it fails"
     (expect (git-zip-commit--commit-changed-files "")
-            :to-eq nil)
+            :to-be nil)
     (expect (git-zip-commit--commit-changed-files
              "23d4d974d6d47aa42842b377de1e046d6a772d4d")
-            :to-eq nil)))
+            :to-be nil)))

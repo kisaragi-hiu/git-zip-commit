@@ -1,11 +1,14 @@
 .cask: Cask
 	cask install
 
-compile: .cask
+ELC := $(patsubst %.el,%.elc,$(wildcard *.el))
+
+$(ELC): .cask $(wildcard *.el)
 	cask build
 
-test: .cask
-	if [ "$$CI" != true ]; then make compile; fi # Locally, always rebuild
+compile: $(ELC)
+
+test: $(ELC)
 	cask exec buttercup tests/
 
 .PHONY: test compile

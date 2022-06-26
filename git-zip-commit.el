@@ -34,6 +34,7 @@
 ;;; Code:
 
 (require 'dash)
+(require 'cl-lib)
 
 (defun git-zip-commit--run (&rest command)
   "Run COMMAND and return result as a string."

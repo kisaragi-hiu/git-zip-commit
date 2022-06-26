@@ -57,10 +57,14 @@
     (split-string "\n" t)))
 
 (defun git-zip-commit--read-recent-commit (prompt)
-  "Ask (with PROMPT) user to select a recent commit in the current repo."
+  "Ask (with PROMPT) user to select a recent commit in the current repo.
+
+If point is on a `git-revision' (defined by Magit), use that as
+the initial input."
   (let ((candidates (-some-> (git-zip-commit--run "git" "log" "--format=oneline")
                       (split-string "\n" t))))
-    (-> (completing-read prompt candidates)
+    (-> (completing-read prompt candidates nil nil
+                         (thing-at-point 'git-revision))
         (split-string " ")
         car)))
 
